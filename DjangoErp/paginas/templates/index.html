@@ -1,0 +1,16 @@
+{% extends 'modelo.html' %}
+
+{% block titulo %}
+<title>Início</title>
+{% endblock %}
+
+{% block conteudo %}
+{% if user.empresa.razao_social %}
+<h3>Bem vindo ao sistema {{ user.empresa.razao_social }}!</h3>
+
+{% else %}
+<p>Antes de Usar o Sistema, Preencha as informações da empresa clicando <a href="{% url 'empresa-update' %}">Aqui</a></p>
+
+{% endif %}
+
+{% endblock %}

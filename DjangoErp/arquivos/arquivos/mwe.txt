@@ -1,0 +1,9 @@
+equipa loja 
+
+6108
+
+cnpj
+fora do estado nao tributado
+
+
+se for fisico 6102

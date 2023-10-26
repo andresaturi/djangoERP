@@ -1,0 +1,2 @@
+# django ERP
+ Simple ERP 

@@ -1,0 +1,23 @@
+{% extends 'modelo.html' %}
+
+{% block conteudo %}
+    <h3>Excluir Registro</h3>
+
+<hr>
+<form action="" method="post">
+    <p class="lead">
+        ATENÇÃO! Ao excluir o campo "<b>{{ object }}</b>", automaticamente serão excluídos todas as Atividades
+        vinculadas a esse campo. Deseja continuar?
+    </p>
+    {% csrf_token %}
+
+    {{ form.as_p }}
+
+    <button type="submit" class="btn btn-danger">
+        Excluir
+    </button>
+</form>
+<a href="{% url 'listar-campo' %}" class="btn btn-primary">
+    Não Excluir
+</a>
+{% endblock %}

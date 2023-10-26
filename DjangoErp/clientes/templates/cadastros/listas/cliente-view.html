@@ -1,0 +1,22 @@
+{% extends 'modelo.html' %}
+{% load static %}
+
+{% block conteudo %}
+<body>
+
+    <h4>{{ object_list.nome }}</h4>
+    <h4>{{ object_list.telefone }}</h4>
+    <h4>{{ object_list.endereco }}</h4>
+    <h4>{{ object_list.cpf }}</h4>
+    <h4>{{ object_list.ativo }}</h4>
+    <hr>
+
+    <hr>
+</body>
+
+<hr>
+<a href="{% url 'listar-clientes' %}" class="btn btn-primary">
+    Voltar
+</a>
+
+{% endblock %}

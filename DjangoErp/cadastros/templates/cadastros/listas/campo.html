@@ -1,0 +1,45 @@
+{% extends 'modelo.html' %}
+
+{% load static %}
+
+
+{% block conteudo %}
+<h3> Lista de Campos</h3>
+
+<a href="{% url 'cadastrar-campo' %}" class="btn btn-primary btn-sm">Adicionar Campos</a>
+
+<hr>
+<div class="table-responsive">
+    <table class="table table-striped">
+    <tr class="text-white">
+        <th>ID</th>
+        <th>Nome</th>
+        <th>Descrição</th>
+        <th>Opções</th>
+    </tr>
+
+        {% for campo in object_list %}
+            <tr class="text-white">
+                <td>{{ campo.pk }}</td>
+                <td>{{ campo.nome }}</td>
+                <td>{{ campo.descricao }}</td>
+                <td>
+                    <a href="{% url 'editar-campo' campo.pk %}" class="btn btn-warning btn-sm">
+                        <i class="fa-solid fa-pen"></i>
+                    </a>
+                    <a href="{% url 'excluir-campo' campo.pk %}" class="btn btn-danger btn-sm">
+                        <i class="fa-solid fa-x"></i>
+                    </a>
+                </td>
+            </tr>
+        {% empty %}
+            <tr>
+                <td>{{ "Nenhum registro encontrado" }}</td>
+            </tr>
+        {% endfor %}
+
+</table>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends 'modelo.html' %}
+{% load bootstrap4 %}
+
+{% load static %}
+
+{% load crispy_forms_tags %}
+
+{% block header %}
+{% endblock %}
+
+{% block conteudo %}
+    <h3>{{ titulo }}</h3>
+
+<hr>
+<form action="" method="post" enctype="multipart/form-data" autocomplete="off">
+    {% csrf_token %}
+
+     {{ form|crispy }}
+    <div class="d-flex">
+    <button type="submit" class="btn btn-primary">
+        <i class="fa fa-check" aria-hidden="true"></i>
+        {{ botao }}
+    </button>
+
+    {% for group in user.groups.all %}
+        {% if group.name == 'Administrador' %}
+            <a href="{% url 'listar-chamados-admin' %}" class="btn btn-secondary">
+                 <i class="fas fa-arrow-left"></i>
+                Voltar
+            </a>
+        {% else %}
+
+            <a href="{% url 'listar-chamados' %}" class="btn btn-secondary">
+                 <i class="fas fa-arrow-left"></i>
+                 Voltar
+            </a>
+        {% endif %}
+    {% endfor %}
+    </div>
+</form>
+{% endblock %}

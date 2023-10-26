@@ -1,0 +1,57 @@
+{% extends 'modelo.html' %}
+
+{% load static %}
+
+{% block conteudo %}
+
+<h3>Chamados LCS-i</h3>
+
+<a href="{% url 'cadastrar-chamado' %}" class="btn btn-primary btn-large">Adicionar Chamado</a>
+
+<hr>
+<div class="table-responsive">
+    <table class="table table-stripped">
+        <tr>
+            <th>Assunto</th>
+            <th>Status</th>
+            <th>Abertura</th>
+            <th>Técnico</th>
+            <th>Opções</th>
+
+        </tr>
+
+    {% for chamado in object_list %}
+        <tr>
+            <td>{{ chamado.assunto }}</td>
+            <td>{{ chamado.status }}</td>
+            <td>{{ chamado.data_criado|date:"d/m/Y" }}</td>
+            <td>{{ chamado.tecnico }}</td>
+
+            <td>
+                {% if chamado.resolucao != none %}
+                <a href="{% url 'listar-chamados-cliente' chamado.pk %}" class="btn btn-success btn-sm">
+                    Ver Resolução
+                </a>
+                {% else %}
+                <a href="{% url 'listar-chamados-cliente' chamado.pk %}" class="btn btn-primary btn-sm">
+                    <i class="fa-solid fa-eye"></i>
+                </a>
+                {% endif %}
+                {% if chamado.status == 'Fechado' %}
+                    <a href="{% url 'excluir-chamado' chamado.pk %}" class="btn btn-success btn-sm">
+                        Resolução
+                    </a>
+                {% endif %}
+            </td>
+        </tr>
+
+    {% empty %}
+        <tr>
+            <td>{{ "Nenhum registro encontrado" }}</td>
+        </tr>
+    {% endfor %}
+
+</table>
+    </div>
+
+{% endblock %}

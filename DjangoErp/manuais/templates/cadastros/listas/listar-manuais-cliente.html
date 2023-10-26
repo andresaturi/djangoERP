@@ -1,0 +1,20 @@
+{% extends 'modelo.html' %}
+{% load static %}
+
+{% block conteudo %}
+<body>
+
+    <h4>{{ object_list.titulo }}</h4>
+    <hr>
+    <p>{{ object_list.detalhes }}</p>
+    <hr>
+    {% if object_list.arquivo.url != '' %}
+        <a href="{{ object_list.arquivo.url }}" target="_blank">Anexo</a>
+    {% endif %}
+
+<hr>
+<a href="{% url 'listar-manuais' %}" class="btn btn-primary">
+    Voltar
+</a>
+</body>
+{% endblock %}

@@ -1,0 +1,36 @@
+{% extends 'modelo.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block conteudo %}
+    <h3>Fechar Chamado</h3>
+    <hr>
+    <form action="" method="post">
+        <p class="lead">
+            Confirma fechar o Chamado "<b>{{ object }}</b>"?
+        </p>
+        {% csrf_token %}
+
+        {{ form|crispy }}
+        <div class="d-flex">
+            <button type="submit" class="btn btn-danger">
+                Fechar
+            </button>
+
+        {% for group in user.groups.all %}
+            {% if group.name == 'Administrador' %}
+                <a href="{% url 'listar-chamados-admin' %}" class="btn btn-secondary">
+                    <i class="fas fa-arrow-left"></i>
+                    Voltar
+                </a>
+            {% else %}
+
+            <a href="{% url 'listar-chamados' %}" class="btn btn-secondary">
+                <i class="fas fa-arrow-left"></i>
+                Voltar
+            </a>
+            {% endif %}
+        {% endfor %}
+        </div>
+    </form>
+{% endblock %}

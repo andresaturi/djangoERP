@@ -1,0 +1,28 @@
+{% extends 'modelo.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block conteudo %}
+    <h3>Excluir Cliente</h3>
+    <hr>
+
+    <form action="" method="post">
+        <p class="lead">
+            Confirma Exclusão do Cliente "<b>{{ object }}</b>"?
+        </p>
+        {% csrf_token %}
+
+        {{ form.as_p }}
+        <div class="d-flex">
+            <button type="submit" class="btn btn-danger">
+                Excluir
+            </button>
+
+        <a href="{% url 'listar-clientes' %}" class="btn btn-secondary">
+            <i class="fas fa-arrow-left"></i>
+            Voltar
+        </a>
+
+        </div>
+    </form>
+{% endblock %}

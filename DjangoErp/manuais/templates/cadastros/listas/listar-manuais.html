@@ -1,0 +1,59 @@
+{% extends 'modelo.html' %}
+
+{% load static %}
+
+{% block conteudo %}
+
+<h3>Manuais LCS-i</h3>
+
+{% for group in user.groups.all %}
+    {% if group.name == 'Administrador' %}
+        <a href="{% url 'cadastrar-manual' %}" class="btn btn-primary">Adicionar Manual</a>
+    {% endif %}
+{% endfor %}
+
+<hr>
+<table class="table table-stripped">
+    <tr>
+        <th>Manual</th>
+        <th>Detalhes</th>
+        <th>Arquivos</th>
+        <th>Opções</th>
+    </tr>
+
+{% for manual in object_list %}
+    <tr>
+        <td>{{ manual.titulo }}</td>
+        <td>{{ manual.detalhes }}</td>
+        {% if manual.arquivo.url != '' %}
+        <th><a href="{{ manual.arquivo.url }}" target="_blank">Ver</a></th>
+        {% else %}
+        <td>Sem Anexo</td>
+        {% endif %}
+
+        <td>
+            <a href="{% url 'listar-manuais-cliente' manual.pk  %}" class="btn btn-primary btn-sm">
+                <i class="fa-solid fa-eye"></i>
+            </a>
+            {% for group in user.groups.all %}
+                {% if group.name == 'Administrador' %}
+                    <a href="{% url 'editar-manual' manual.pk %}" class="btn btn-warning btn-sm">
+                         <i class="fa-solid fa-pen"></i>
+                     </a>
+                    <a href="{% url 'excluir-manual' manual.pk %}" class="btn btn-danger btn-sm">
+                        <i class="fa-solid fa-x"></i>
+                    </a>
+                {% endif %}
+            {% endfor %}
+
+        </td>
+    </tr>
+
+{% empty %}
+    <tr>
+        <td>{{ "Nenhum registro encontrado" }}</td>
+    </tr>
+</table>
+{% endfor %}
+
+{% endblock %}

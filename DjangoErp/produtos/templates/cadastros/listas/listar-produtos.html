@@ -1,0 +1,62 @@
+{% extends 'modelo.html' %}
+
+{% load static %}
+
+{% block conteudo %}
+
+<h3>Produtos</h3>
+
+<form action="?" method="get" class="float-right">
+    <div class="d-flex">
+         <input type="text" name="produto" id="" value="{{ request.GET.nome }}" autocomplete="off" placeholder="Buscar Cliente">
+         <button type="submit" class="btn btn-ligth">
+            Buscar
+         </button>
+         <a href="{% url 'listar-produtos' %}" class="btn btn-ligth">Limpar</a>
+    </div>
+    <hr>
+</form>
+
+<a href="{% url 'cadastrar-produto' %}" class="btn btn-primary btn-large">Adicionar Produto</a>
+
+<hr>
+<div class="table-responsive">
+    <table class="table table-stripped">
+        <tr>
+            <th>Nome</th>
+            <th>Categoria</th>
+            <th>Venda</th>
+            <th>Opções</th>
+
+        </tr>
+
+    {% for produto in object_list %}
+        <tr>
+            <td>{{ produto.nome }}</td>
+            <td>{{ produto.categoria }}</td>
+            <td>R$ {{ produto.venda }}</td>
+            <td>
+                <a href="{% url 'listar-produto-cliente' produto.pk %}" class="btn btn-primary btn-sm">
+                    <i class="fa-solid fa-eye"></i>
+                </a>
+                <a href="{% url 'editar-produto' produto.pk %}" class="btn btn-warning btn-sm">
+                    <i class="fa-solid fa-pen"></i>
+                </a>
+                <a href="{% url 'excluir-produto' produto.pk %}" class="btn btn-danger btn-sm">
+                    <i class="fa-solid fa-x"></i>
+                </a>
+
+            </td>
+
+        </tr>
+
+    {% empty %}
+        <tr>
+            <td>{{ "Nenhum registro encontrado" }}</td>
+        </tr>
+    {% endfor %}
+
+</table>
+    </div>
+
+{% endblock %}

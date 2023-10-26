@@ -1,0 +1,22 @@
+{% extends 'modelo.html' %}
+
+{% block conteudo %}
+    <h3>Excluir Registro</h3>
+
+<hr>
+<form action="" method="post">
+    <p class="lead">
+        Confirma excuir o registro "<b>{{ object }}</b>"?
+    </p>
+    {% csrf_token %}
+
+    {{ form.as_p }}
+
+    <button type="submit" class="btn btn-danger">
+        Excluir
+    </button>
+</form>
+<a href="{% url 'listar-atividade' %}" class="btn btn-primary">
+    Não Excluir
+</a>
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends 'modelo.html' %}
+
+{% block conteudo %}
+    <h3>Excluir Registro</h3>
+
+    <hr>
+    <form action="" method="post">
+        <p class="lead">
+            Confirma excuir o registro "<b>{{ object }}</b>"?
+        </p>
+        {% csrf_token %}
+
+        {{ form.as_p }}
+        <div class="d-flex">
+             <button type="submit" class="btn btn-danger">
+                 <i class="fa-solid fa-x"></i>
+                Excluir
+             </button>
+             <a href="{% url 'listar-manuais' %}" class="btn btn-secondary">
+                 <i class="fas fa-arrow-left"></i>
+                Não Excluir
+             </a>
+        </div>
+    </form>
+
+{% endblock %}

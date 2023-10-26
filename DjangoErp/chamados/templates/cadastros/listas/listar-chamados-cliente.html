@@ -1,0 +1,40 @@
+{% extends 'modelo.html' %}
+{% load static %}
+
+{% block conteudo %}
+<body>
+
+    <h4>{{ object_list.assunto }}</h4>
+    <hr>
+    <p>{{ object_list.detalhes }}</p>
+    <hr>
+    {% if object_list.resolucao != none %}
+    <h3>Resolucao</h3>
+    <p>{{ object_list.resolucao }}</p>
+    {% endif %}
+    {% if object_list.arquivo.url != '' %}
+       <p><a href="{{ object_list.arquivo.url }}" target="_blank">Anexo</a></p>
+
+    {% endif %}
+
+
+{% for group in user.groups.all %}
+    {% if group.name == 'Administrador' %}
+        {% if object_list.atividade != '' %}
+            <hr>
+            <h3>Atividades</h3>
+            <p>{{ object_list.atividade }}</p>
+            <hr>
+        {% endif %}
+            <a href="{% url 'listar-chamados-admin' %}" class="btn btn-secondary">
+                <i class="fas fa-arrow-left"></i>
+                Voltar
+            </a>
+    {% else %}
+        <a href="{% url 'listar-chamados' %}" class="btn btn-secondary">
+            Voltar
+        </a>
+    {% endif %}
+    {% endfor %}
+</body>
+{% endblock %}
